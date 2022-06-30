@@ -1,0 +1,3 @@
+struct Piece {
+    captured: bool,
+}
