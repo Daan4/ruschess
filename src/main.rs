@@ -1,8 +1,9 @@
 mod position;
+mod piece;
+mod player;
+mod game;
 
 fn main() {
-    let pos = position::Position::new(1, 2);
-    println!("{}", pos);
-    let pos = position::Position::new(0, 2);
-    println!("{}", pos);
+    let chess = game::Game::new("Daan".to_owned(), "cthulhe".to_owned());
+    println!("{}\n{}", chess.white, chess.black)
 }

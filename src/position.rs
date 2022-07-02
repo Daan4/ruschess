@@ -1,8 +1,9 @@
 use std::fmt;
 
+#[derive(Copy, Clone)]
 pub struct Position {
     r#file: usize,
-    rank: usize
+    rank: usize,
 }
 
 impl Position {
@@ -10,11 +11,11 @@ impl Position {
         Position{r#file, rank}
     }
 
-    fn valid(&self) -> bool {
+    pub fn valid(&self) -> bool {
         self.r#file > 0 && self.r#file < 9 && self.rank > 0 && self.rank < 9
     }
 
-    fn distance(&self, position: Position) -> usize {
+    pub fn distance(&self, position: Position) -> usize {
         self.r#file.abs_diff(position.r#file) + self.rank.abs_diff(position.rank)
     }
 }
