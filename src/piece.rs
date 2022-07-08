@@ -1,7 +1,8 @@
 use crate::position::Position;
 use crate::game::Side;
+use std::fmt;
 
-pub trait Piece {
+pub trait Piece: fmt::Display {
     // Move a piece, returns Err if the destination is invalid
     fn r#move(&mut self, destination: Position) -> Result<(), String>;
 
@@ -11,6 +12,8 @@ pub trait Piece {
     fn position(&self) -> Position;
 
     fn side(&self) -> Side;
+
+    fn captured(&self) -> bool;
 }
 
 pub struct King {
@@ -50,6 +53,19 @@ impl Piece for King {
     fn side(&self) -> Side {
         self.side
     }
+
+    fn captured(&self) -> bool {
+        self.captured
+    }
+}
+
+impl fmt::Display for King {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.side() {
+            Side::White => write!(f, "K"),
+            Side::Black => write!(f, "k"),
+        }        
+    }
 }
 
 pub struct Queen {
@@ -79,6 +95,19 @@ impl Piece for Queen {
 
     fn side(&self) -> Side {
         self.side
+    }
+
+    fn captured(&self) -> bool {
+        self.captured
+    }
+}
+
+impl fmt::Display for Queen {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.side() {
+            Side::White => write!(f, "Q"),
+            Side::Black => write!(f, "q"),
+        }        
     }
 }
 
@@ -111,6 +140,19 @@ impl Piece for Rook {
     fn side(&self) -> Side {
         self.side
     }
+
+    fn captured(&self) -> bool {
+        self.captured
+    }
+}
+
+impl fmt::Display for Rook {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.side() {
+            Side::White => write!(f, "R"),
+            Side::Black => write!(f, "r"),
+        }        
+    }
 }
 
 pub struct Bishop {
@@ -140,6 +182,19 @@ impl Piece for Bishop {
 
     fn side(&self) -> Side {
         self.side
+    }
+
+    fn captured(&self) -> bool {
+        self.captured
+    }
+}
+
+impl fmt::Display for Bishop {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.side() {
+            Side::White => write!(f, "B"),
+            Side::Black => write!(f, "b"),
+        }        
     }
 }
 
@@ -171,6 +226,19 @@ impl Piece for Knight {
     fn side(&self) -> Side {
         self.side
     }
+
+    fn captured(&self) -> bool {
+        self.captured
+    }
+}
+
+impl fmt::Display for Knight {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.side() {
+            Side::White => write!(f, "N"),
+            Side::Black => write!(f, "n"),
+        }        
+    }
 }
 
 pub struct Pawn {
@@ -201,5 +269,18 @@ impl Piece for Pawn {
 
     fn side(&self) -> Side {
         self.side
+    }
+
+    fn captured(&self) -> bool {
+        self.captured
+    }
+}
+
+impl fmt::Display for Pawn {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self.side() {
+            Side::White => write!(f, "P"),
+            Side::Black => write!(f, "p"),
+        }        
     }
 }
